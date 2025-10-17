@@ -42,7 +42,7 @@
                     <button @click="showModalProd = true; $wire.clearField()"
                         class="w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                         <i class="fas fa-plus-circle"></i>
-                        <span>Novo Artigo</span>
+                        <span>Novo Produto</span>
                     </button>
                 </div>
             </div>
@@ -92,6 +92,12 @@
                                         class="text-red-600 hover:underline">
                                         <i class="fas fa-trash"></i>
                                     </button>
+
+                                     <button wire:click="confirm({{ $item->id }})"
+                                        class="text-blue-600 hover:underline">
+                                        <i class="fa-solid fa-images"></i>
+                                    </button>
+
                                 </td>
                             </tr>
                         @empty

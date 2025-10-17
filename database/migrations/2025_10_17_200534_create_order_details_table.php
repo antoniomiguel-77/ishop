@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Company;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Database\Migrations\Migration;
@@ -15,6 +16,7 @@ return new class extends Migration
     {
         Schema::create('order_details', function (Blueprint $table) {
             $table->id();
+            $table->foreignIdFor(Company::class)->nullable();
             $table->foreignIdFor(Order::class)
                 ->constrained()
                 ->onDelete('cascade');
