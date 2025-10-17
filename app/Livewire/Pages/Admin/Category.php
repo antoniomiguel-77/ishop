@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Livewire\Admin;
+namespace App\Livewire\Pages\Admin;
 
 use Livewire\Component;
 use App\Repositories\Category\CategoryRepository;
@@ -42,7 +42,7 @@ class Category extends Component
     }
 
     /**salvar ou actualizar dados de catgoria */
-    public function save()
+    public function saveCategory()
     {
 
         $this->validate();
@@ -72,7 +72,7 @@ class Category extends Component
                     ->toast()
                     ->position('top-end')
                     ->show();
-                $this->reset(['name']);
+                $this->reset(['name','category_id']);
             }
         } catch (\Exception $th) {
             LivewireAlert::text('Falha ao realizar a operação. Por favor, tente novamente.')

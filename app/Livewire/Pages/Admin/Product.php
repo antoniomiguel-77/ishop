@@ -14,7 +14,7 @@ use Livewire\WithPagination;
 class Product extends Component
 {
     use WithPagination;
-    public $product_id, $subcategory_id, $category_id, $searchCategory, $searchSubcategory;
+    public $product_id, $subcategory_id, $category_id, $searchCategory,$qtd = 1;
     public $categories = [];
     public $name, $price, $type = 'unit', $tax = 0, $reason_id, $perPage = 5, $search;
 
@@ -177,7 +177,7 @@ class Product extends Component
             $data = [
                 'product_id' => $this->product_id,
                 'name' => $this->name,
-                'reason_id' => ((int)$this->reason_id > 0) ? (int)$this->reason_id : null,
+                'reason_tax_id' => ((int)$this->reason_id > 0) ? (int)$this->reason_id : null,
                 'price' => $this->price,
                 'type' => $this->type,
                 'tax' => $this->tax,

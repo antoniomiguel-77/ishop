@@ -22,7 +22,7 @@ class ProductFactory extends Factory
             'name'           => $faker->word(),
             'code'           => $faker->unique()->ean8(),
             'price'          => $faker->randomFloat(2, 100, 10000),
-            'retention'      => $faker->randomFloat(2, 0, 50),
+            'retention'      => 6.5,
             'type'           => $faker->randomElement(['service', 'unit']),
             'tax'            => $faker->numberBetween(0, 30),
             'reason_tax_id'      => ReasonTax::inRandomOrder()->value('id'),

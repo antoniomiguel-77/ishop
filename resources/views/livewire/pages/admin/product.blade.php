@@ -1,4 +1,4 @@
-<div x-data="{ showModalProd: false, showModalCategory: false, showModalSubcategory: false }" x-init="document.addEventListener('closeModal', () => { showModal = false }),
+<div x-data="{ showModalProd: false, showModalCategory: false }" x-init="document.addEventListener('closeModal', () => { showModalProd = false }),
     document.addEventListener('closeModalCategory', () => { showModalCategory = false })">
 
     <x-slot name="header">
@@ -11,18 +11,19 @@
         <div class="max-w-8xl mx-auto bg-white rounded-2xl shadow-sm overflow-hidden">
             <!-- Header -->
             <div
-                class="flex flex-col sm:flex-row justify-between gap-2 sm:items-center px-6 py-4 border-b border-gray-200">
-                <div class="flex flex-col sm:flex-row gap-2">
+                class="flex flex-col sm:flex-row justify-between gap-3 sm:items-center px-4 sm:px-6 py-4 border-b border-gray-200">
+                <!-- Filtros e Pesquisa -->
+                <div class="flex flex-col sm:flex-row gap-2 w-full sm:w-auto">
                     <!-- Select Registros -->
                     <select wire:model.live.debounce.100ms="perPage"
-                        class="rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                        class="rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm w-full sm:w-auto">
                         <option value="5">5 Registros</option>
                         <option value="20">20 Registros</option>
                         <option value="50">50 Registros</option>
                     </select>
 
                     <!-- Campo de pesquisa -->
-                    <div class="relative">
+                    <div class="relative w-full sm:w-72">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-2">
                             <svg viewBox="0 0 24 24" class="h-4 w-4 fill-current text-gray-500">
                                 <path
@@ -32,18 +33,20 @@
                         </span>
                         <input type="search" wire:model.live.debounce.100ms="search"
                             placeholder="Pesquisar por descrição, categoria e subcategoria"
-                            class="pl-8 w-72 rounded-lg border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
+                            class="pl-8 pr-2 py-2 rounded-lg w-full border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
                     </div>
                 </div>
 
                 <!-- Botão adicionar -->
-                <div>
+                <div class="w-full sm:w-auto">
                     <button @click="showModalProd = true; $wire.clearField()"
-                        class="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
-                        <i class="fas fa-plus"></i> Novo Artigo
+                        class="w-full sm:w-auto inline-flex justify-center items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-plus-circle"></i>
+                        <span>Novo Artigo</span>
                     </button>
                 </div>
             </div>
+
 
             <!-- Tabela -->
             <div class="overflow-x-auto">
@@ -64,8 +67,7 @@
                         @forelse ($products ?? [] as $item)
                             <tr>
                                 <td class="px-6 py-3 truncate">
-                                    <span class="uppercase font-medium">{{ $item->category->name ?? '-' }}</span><br>
-                                    <small class="text-gray-500">Sub.: {{ $item->subcategory->name ?? '-' }}</small>
+                                    <span class="uppercase font-medium">{{ $item->category->name ?? '-' }}</span>
                                 </td>
                                 <td class="px-6 py-3">
                                     <span class="uppercase font-medium">{{ $item->name }}</span><br>
@@ -111,17 +113,15 @@
     </div>
 
     @include('includes.product')
+    @livewire('pages.admin.category')
 </div>
 
-{{-- @livewire('admin.category') --}}
 
 <script>
     document.addEventListener('resetSelect2', () => {
         $("#category").val(null).trigger("change");
         $("#category_modal_subcategory").val(null).trigger("change")
     })
-
-
 
     document.addEventListener('editProd', (event) => {
         let [categoryId, subcategoryId] = event.detail;

@@ -31,11 +31,11 @@ class ProductRequest extends FormRequest
                     ),
             ],
             'type' => 'nullable|string|max:255',
+            'qtd' => 'numeric|min:1|required',
             'price' => 'required',
             'tax' => 'required|numeric',
             'reason_id' => 'required_if:tax,0',
             'category_id' => 'required|exists:categories,id',
-            'subcategory_id' => 'required|exists:subcategories,id',
         ];
     }
 
@@ -56,9 +56,9 @@ class ProductRequest extends FormRequest
             'tax.required' => 'Campo brigatório.',
             'category_id.required' => 'Campo brigatório.',
             'category_id.exists' => 'A categoria selecionada não existe.',
-
-            'subcategory_id.required' => 'Campo brigatório.',
-            'subcategory_id.exists' => 'A subcategoria selecionada não existe.',
+            'qtd.min' => 'Quantidade deve ser maior duque zero.',
+            'qtd.required' => 'Campo brigatório.',
+            'qtd.numeric' => 'Informe um número valido..',
         ];
     }
 }

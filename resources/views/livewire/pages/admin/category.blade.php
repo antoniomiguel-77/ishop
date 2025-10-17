@@ -34,6 +34,8 @@
 
                     <!-- Botões -->
                     <div class="flex justify-end mt-4 space-x-3">
+
+
                         <button type="button"
                             @click="
                         @this.set('category_id', null);
@@ -41,7 +43,7 @@
                             class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
                             Cancelar
                         </button>
-                        <button type="button" wire:click="save" wire:loading.attr="disabled" @click.stop
+                        <button type="button" wire:click="saveCategory" wire:loading.attr="disabled" @click.stop
                             class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700 flex items-center justify-center">
                             <svg wire:loading wire:target="save" class="animate-spin h-4 w-4 text-white"
                                 xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -81,33 +83,15 @@
                                 <tr>
                                     <td class="px-6 py-4">{{ $category->name }}</td>
                                     <td class="px-6 py-4 text-right space-x-2">
-                                        <div class="inline-flex rounded-md shadow-xs" role="group">
-                                            <button wire:click="edit({{ $category->id }})" type="button"
-                                                class="inline-flex items-center px-3 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-s-lg hover:bg-gray-800 hover:text-gray-100 focus:z-10 focus:ring-2 focus:ring-gray-700 focus:text-gray-700 ">
-                                                <svg class="w-4 h-4 " aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2"
-                                                        d="m14.304 4.844 2.852 2.852M7 7H4a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h11a1 1 0 0 0 1-1v-4.5m2.409-9.91a2.017 2.017 0 0 1 0 2.853l-6.844 6.844L8 14l.713-3.565 6.844-6.844a2.015 2.015 0 0 1 2.852 0Z" />
-                                                </svg>
 
-
-                                            </button>
-
-                                            <button type="button" wire:click="confirm({{ $category->id }})"
-                                                class="inline-flex items-center px-4 py-2 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-e-lg hover:bg-red-500 hover:text-gray-100 focus:z-10 focus:ring-2 focus:ring-red-700 focus:text-blue-700 ">
-                                                <svg class="w-4 h-4 " aria-hidden="true"
-                                                    xmlns="http://www.w3.org/2000/svg" width="24" height="24"
-                                                    fill="none" viewBox="0 0 24 24">
-                                                    <path stroke="currentColor" stroke-linecap="round"
-                                                        stroke-linejoin="round" stroke-width="2"
-                                                        d="M5 7h14m-9 3v8m4-8v8M10 3h4a1 1 0 0 1 1 1v3H9V4a1 1 0 0 1 1-1ZM6 7h12v13a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V7Z" />
-                                                </svg>
-
-
-                                            </button>
-                                        </div>
+                                        <button type="button" wire:click="edit({{ $category->id }})"
+                                            class="text-blue-600 hover:underline mr-2">
+                                            <i class="fas fa-pen"></i>
+                                        </button>
+                                        <button type="button" wire:click="confirm({{ $category->id }})"
+                                            class="text-red-600 hover:underline">
+                                            <i class="fas fa-trash"></i>
+                                        </button>
                                     </td>
                                 </tr>
                             @empty

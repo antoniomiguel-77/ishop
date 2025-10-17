@@ -1,5 +1,9 @@
-<div x-show="showModalProd" x-transition
-    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50" style="display: none;">
+<div 
+    x-show="showModalProd"
+    x-transition
+    class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+    style="display: none;"
+>
 
     <!-- Conteúdo da Modal -->
     <div class="bg-white rounded-lg shadow-lg max-w-4xl w-full p-6" @click.away.stop>
@@ -80,7 +84,7 @@
 
                             {{-- este botão já não é re-renderizado pelo Livewire --}}
                             <button type="button" @click="showModalCategory = true"
-                                class="bg-gray-900 hover:bg-gray-700 text-white px-3 rounded-r-lg flex items-center justify-center">
+                                class="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-r-lg hover:bg-blue-700 transition ">
                                 <i class="fas fa-plus-circle"></i>
                             </button>
                         </div>
@@ -88,18 +92,6 @@
                             <span class="text-sm text-red-600">{{ $message }}</span>
                         @enderror
                     </div>
-
-
-
-
-
-
-
-
-
-
-
-
                 </div>
 
                 <div class="flex flex-col md:flex-row gap-4 mb-5" x-data="{
@@ -184,7 +176,7 @@
                         Cancelar
                     </button>
                     <button type="button" wire:click="saveProd" wire:loading.attr="disabled" @click.stop
-                        class="bg-gray-900 text-white px-4 py-2 rounded hover:bg-gray-700 flex items-center justify-center">
+                        class="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition">
                         <svg wire:loading wire:target="save" class="animate-spin h-4 w-4 text-white"
                             xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
                             <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
@@ -204,6 +196,4 @@
 </div>
 <script>
     initSelect2('#category', 'category_id', null);
-    initSelect2('#subcategory', 'subcategory_id', null)
-    initSelect2('#category_modal_subcategory', 'category_id', null)
 </script>
