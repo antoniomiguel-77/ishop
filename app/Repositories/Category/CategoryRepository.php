@@ -4,7 +4,7 @@ namespace App\Repositories\Category;
 
 
 use Illuminate\Support\Facades\Log;
-use App\Models\Admin\Category;
+use App\Models\Category;
 
 
 class CategoryRepository

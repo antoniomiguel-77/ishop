@@ -31,7 +31,7 @@
                         @enderror
                     </div>
 
-                    <!-- NIF -->
+                    <!-- preco -->
                     <div class="w-full md:w-1/2" x-data="{}">
                         <label for="taxpayer" class="block mb-2 text-sm font-medium text-gray-900">
                             Preço <span class="text-red-600">*</span>
@@ -47,6 +47,20 @@
                 </div>
 
                 <div class="flex flex-col md:flex-row gap-4 mb-5">
+
+
+                    <div class="w-full md:w-1/2" x-data="{}">
+                        <label for="taxpayer" class="block mb-2 text-sm font-medium text-gray-900">
+                            Quantidade <span class="text-red-600">*</span>
+                        </label>
+                        <input type="text" id="price" wire:model="qtd"
+                            x-mask:dynamic="$money($input, '.', '',2)"
+                            class="shadow-xs bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                            placeholder="0.00" />
+                        @error('qtd')
+                            <span class="text-sm text-red-600">{{ $message }}</span>
+                        @enderror
+                    </div>
                     <!-- Categoria -->
                     <div class="w-full md:w-1/2">
                         <label for="category" class="block mb-2 text-sm font-medium text-gray-900">Categoria<span
@@ -80,33 +94,8 @@
 
 
 
-                    <!-- Subcategoria -->
-                    <div class="w-full md:w-1/2">
-                        <label for="subcategory" class="block mb-2 text-sm font-medium text-gray-900">Subcategoria <span
-                                class="text-red-500">*</span></label>
-                        <div class="flex my-2 rounded-lg overflow-hidden shadow-sm">
-                            <div class="flex-1">
-                                <select id="subcategory"
-                                    class="w-full border border-r-0 rounded-l-lg px-3 py-2 focus:ring-0 focus:outline-none">
-                                    <option value="">Selecionar Subcategoria...</option>
-                                    @foreach ($subcategories as $item)
-                                        <option value="{{ $item->id }}">
-                                            {{ $item->name }}
-                                        </option>
-                                    @endforeach
-                                </select>
-                            </div>
 
-                            {{-- este botão já não é re-renderizado pelo Livewire --}}
-                            <button type="button" @click="showModalSubcategory = true"
-                                class="bg-gray-900 hover:bg-gray-700 text-white px-3 rounded-r-lg flex items-center justify-center">
-                                <i class="fas fa-plus-circle"></i>
-                            </button>
-                        </div>
-                        @error('subcategory_id')
-                            <span class="text-sm text-red-600">{{ $message }}</span>
-                        @enderror
-                    </div>
+
 
 
 

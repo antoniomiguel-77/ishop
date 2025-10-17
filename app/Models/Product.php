@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Models\Admin;
+namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Database\Eloquent\SoftDeletes;
@@ -29,6 +29,8 @@ class Product extends Model
         'user_id',
         'category_id',
         'company_id',
+        'reason_tax_id',
+        'quantity'
     ];
  
     public function category()

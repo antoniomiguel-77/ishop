@@ -8,7 +8,7 @@
             <!-- Header -->
             <div class="flex justify-between items-center border-b pb-3">
                 <h3 class="text-xl font-semibold text-gray-900">
-                    {{ $category_id != null ? 'Editar' : 'Adicionar' }} Categoria
+                    {{-- {{ $category_id != null ? 'Editar' : 'Adicionar' }} Categoria --}}
                 </h3>
                 <button @click="showModalCategory = false"
                     class="text-gray-500 hover:text-gray-900 text-lg font-bold">✕</button>
@@ -77,7 +77,7 @@
                             </tr>
                         </thead>
                         <tbody class="divide-y divide-gray-100 ">
-                            @forelse($categories as $category)
+                            @forelse($categories ?? [] as $category)
                                 <tr>
                                     <td class="px-6 py-4">{{ $category->name }}</td>
                                     <td class="px-6 py-4 text-right space-x-2">

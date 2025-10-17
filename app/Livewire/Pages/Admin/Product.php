@@ -7,9 +7,7 @@ use Livewire\Attributes\Layout;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use App\Repositories\Product\ProductRepository;
 use App\Repositories\Category\CategoryRepository;
-use App\Repositories\Subcategory\SubcategoryRepository;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\{DB,Log};
 use Livewire\Attributes\On;
 use Livewire\WithPagination;
 
@@ -153,12 +151,17 @@ class Product extends Component
                 'search' => $this->search,
                 'perPage' => $this->perPage,
             ]);
+
+     
+            
         } catch (\Throwable $th) {
             LivewireAlert::text('Falha ao realizar a operação. Por favor, tente novamente.')
                 ->error()
                 ->toast()
                 ->position('top-end')
                 ->show();
+
+                return [];
         }
     }
 

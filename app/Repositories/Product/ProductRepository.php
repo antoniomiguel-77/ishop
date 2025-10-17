@@ -2,13 +2,9 @@
 
 namespace App\Repositories\Product;
 
-use App\Repositories\BaseRepository;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
-use App\Models\Admin\Product;
-use App\Models\Admin\Category;
-use App\Models\Admin\Subcategory;
+use App\Models\Product;
 
 
 class ProductRepository
@@ -100,7 +96,7 @@ class ProductRepository
         try {
 
             return Cache::remember('tax_reasons', 60, function () {
-                return \App\Models\Admin\ReasonTax::select('id', 'name')
+                return \App\Models\ReasonTax::select('id', 'name')
                     ->orderBy('name', 'asc')
                     ->get();
             });
