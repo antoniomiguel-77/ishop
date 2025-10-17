@@ -67,8 +67,8 @@ class UserRepository
                         ->orWhere('email', 'like', '%' . $search['search'] . '%');
                 }
             })
-            //->where('company_id', auth()->user()->company_id ?? null)
-                
+            ->whereNotIn('name',['admin'])
+            ->where('company_id', auth()->user()->company_id ?? null)
                 ->orderBy('created_at', 'desc')
                 ->paginate($search['perPage'] ?? 5);
         } catch (\Throwable $th) {
@@ -78,7 +78,7 @@ class UserRepository
                 'file' => $th->getFile(),
             ]);
 
-            return false;
+            return [];
         }
     }
 }

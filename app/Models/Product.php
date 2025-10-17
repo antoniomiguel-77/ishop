@@ -5,7 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use \Illuminate\Database\Eloquent\SoftDeletes;
 use \Illuminate\Database\Eloquent\Factories\HasFactory;
-use App\Models\{Category,Company,ReasonTax,User};
+use App\Models\{Category, Company, ReasonTax, User};
 use Illuminate\Database\Eloquent\Casts\Attribute;
 
 class Product extends Model
@@ -32,7 +32,7 @@ class Product extends Model
         'reason_tax_id',
         'quantity'
     ];
- 
+
     public function category()
     {
         return $this->belongsTo(Category::class);
@@ -75,5 +75,10 @@ class Product extends Model
 
             return round($base, 2);
         });
+    }
+
+    public function orderDetails()
+    {
+        return $this->hasMany(OrderDetail::class);
     }
 }

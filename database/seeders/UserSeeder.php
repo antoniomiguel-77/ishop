@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
         $user = User::updateOrCreate(
             ['email' => 'admin@example.com'],
             [
-                'name' => 'Admin User',
+                'name' => 'admin',
                 'password' => bcrypt('password'), 
                 'email_verified_at' => now(),
                 'company_id' => Company::inRandomOrder()->value('id'),
