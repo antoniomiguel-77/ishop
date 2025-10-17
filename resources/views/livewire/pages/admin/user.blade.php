@@ -72,5 +72,4 @@
     </div>
 </div>
 
-@include('includes.user-modal')
 </div>

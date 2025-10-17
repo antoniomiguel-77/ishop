@@ -2,7 +2,7 @@
     document.addEventListener('closeModalCategory', () => { showModalCategory = false }),
     document.addEventListener('closeModalSubcategory', () => { showModalSubcategory = false })">
 
-    @livewire('admin.subcategory')
+  
 
     <div class="mt-6">
         <h3 class="text-gray-700 text-3xl font-medium">Meus Artigos/Serviços</h3>
@@ -163,18 +163,13 @@
 <script>
     document.addEventListener('resetSelect2', () => {
         $("#category").val(null).trigger("change");
-        $("#subcategory").val(null).trigger("change")
         $("#category_modal_subcategory").val(null).trigger("change")
     })
 
-    document.addEventListener('editSubcategory', (event) => {
-        let categoryId = event.detail;
-        $("#category_modal_subcategory").val(categoryId).trigger("change")
-    })
+
 
     document.addEventListener('editProd', (event) => {
         let [categoryId, subcategoryId] = event.detail;
         $("#category").val(categoryId).trigger("change");
-        $("#subcategory").val(subcategoryId).trigger("change")
     })
 </script>

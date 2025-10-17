@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Pages\Admin\Order;
+use App\Livewire\Pages\Admin\Product;
 use App\Livewire\Pages\Admin\User;
 use Illuminate\Support\Facades\Route;
 
@@ -20,7 +21,7 @@ Route::view('profile', 'profile')
 Route::middleware('auth')->group(function () {
     Route::get('utilizadores', User::class)->name('manager.users');
     Route::get('encomendas', Order::class)->name('manager.orders');
-    Route::get('produtos', Order::class)->name('manager.products');
+    Route::get('produtos', Product::class)->name('manager.products');
 });
 
 require __DIR__ . '/auth.php';
