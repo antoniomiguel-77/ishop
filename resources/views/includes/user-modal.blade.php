@@ -1,14 +1,11 @@
 <!-- Modal Adicionar/Editar Usuário -->
 <div
-    x-data="{ open: @entangle('showModal') }"
-    x-show="open"
-    x-cloak
     class="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50"
 >
     <div class="bg-white rounded-2xl shadow-lg w-full max-w-md p-6 relative animate-fade-in">
         <!-- Botão fechar -->
         <button
-            @click="open = false"
+            @click="showModal = false"
             class="absolute top-3 right-3 text-gray-500 hover:text-gray-800"
         >
             <i class="fas fa-times"></i>

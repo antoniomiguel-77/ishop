@@ -8,7 +8,7 @@ use Livewire\Component;
 class User extends Component
 {
 
-    public $name,$email,$role;
+    public $name,$email,$role,$isEditing;
     
     #[Layout('layouts.app')]
     public function render()

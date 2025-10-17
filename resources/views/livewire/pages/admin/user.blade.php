@@ -18,7 +18,7 @@
             </div>
             <div>
                 <button 
-                    wire:click="openCreateModal"
+                    @click=""
                     class="inline-flex items-center gap-2 bg-blue-600 text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition"
                 >
                     <i class="fas fa-plus"></i> Adicionar
@@ -72,4 +72,5 @@
     </div>
 </div>
 
+@include('includes.user-modal')
 </div>
