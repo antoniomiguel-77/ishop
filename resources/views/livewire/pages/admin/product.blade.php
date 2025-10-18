@@ -1,4 +1,4 @@
-<div x-data="{ showModalProd: false, showModalCategory: false }" x-init="document.addEventListener('closeModal', () => { showModalProd = false }),
+<div x-data="{ showModalProd: false, showModalCategory: false,showModalGallery:false }" x-init="document.addEventListener('closeModal', () => { showModalProd = false }),
     document.addEventListener('closeModalCategory', () => { showModalCategory = false })">
 
     <x-slot name="header">
@@ -93,7 +93,7 @@
                                         <i class="fas fa-trash"></i>
                                     </button>
 
-                                     <button wire:click="confirm({{ $item->id }})"
+                                     <button @click="showModalGallery = true" wire:click="setProductId({{ $item->id }})"
                                         class="text-blue-600 hover:underline">
                                         <i class="fa-solid fa-images"></i>
                                     </button>
@@ -120,6 +120,7 @@
 
     @include('includes.product')
     @livewire('pages.admin.category')
+    @livewire('pages.admin.gallery')
 </div>
 
 

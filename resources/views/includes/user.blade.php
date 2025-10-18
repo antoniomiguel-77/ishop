@@ -78,6 +78,3 @@
 
 
 </div>
-<script>
-    initSelect2('#category', 'category_id', null);
-</script>

@@ -290,4 +290,16 @@ class Product extends Component
                 ->show();
         }
     }
+
+    public function setProductId($product){
+        try {
+            $this->dispatch('productSeted',$product);
+        } catch (\Throwable $th) {
+            LivewireAlert::text('Falha ao excluir o Produto. Por favor, tente novamente.')
+                ->error()
+                ->toast()
+                ->position('top-end')
+                ->show();
+        }
+    }
 }
