@@ -14,10 +14,7 @@ class Gallery extends Component
 
     public $images = [], $existingImages = [], $uploadProgress = 0, $gallery_id, $product_id;
 
-    public function mount()
-    {
-        $this->existingImages = GalleryRepository::search();
-    }
+
 
     /**Validaçoes */
     public function rules()
@@ -80,7 +77,7 @@ class Gallery extends Component
                     ->show();
 
                 $this->existingImages = GalleryRepository::search();
-                $this->dispatch('updatedCheck',['id' => $id]);
+                $this->dispatch('updatedCheck', ['id' => $id]);
             }
         } catch (\Throwable $th) {
             LivewireAlert::text('Falha ao realizar a operação. Por favor, tente novamente.')
@@ -142,6 +139,8 @@ class Gallery extends Component
     #[On('productSeted')]
     public function productSeted($product)
     {
+
         $this->product_id = $product;
+        $this->existingImages = GalleryRepository::search($this->product_id);
     }
 }

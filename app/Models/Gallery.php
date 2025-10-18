@@ -15,4 +15,12 @@ class Gallery extends Model
         'company_id',
         'is_main_image'
     ];
+
+
+    public function product()
+    {
+        return $this->belongsTo(Product::class,'product_id','id');
+    }
+
+    
 }

@@ -30,7 +30,8 @@ class Product extends Model
         'category_id',
         'company_id',
         'reason_tax_id',
-        'quantity'
+        'quantity',
+        'description'
     ];
 
     public function category()
@@ -66,7 +67,7 @@ class Product extends Model
     {
         return Attribute::get(function () {
             $base = $this->price ?? 0;
-            $tax  = $this->tax ?? 0;
+            $tax = $this->tax ?? 0;
 
             if ($tax > 0) {
                 $iva = ($base * $tax) / 100;
@@ -81,4 +82,13 @@ class Product extends Model
     {
         return $this->hasMany(OrderDetail::class);
     }
+
+
+    public function gallery()
+    {
+        return $this->hasMany(Gallery::class, 'product_id', 'id');
+    }
+
+    
+
 }

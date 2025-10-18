@@ -12,13 +12,18 @@ class GalleryRepository
 {
 
     /** get categories */
-    public static function search()
+    public static function search(int $product)
     {
         try {
 
-            return Gallery::where('company_id', auth()->user()->company_id ?? null)
-                ->orderBy('created_at', 'desc')
-                ->get();
+            if(!empty($product)) {
+
+                return Gallery::where('company_id', auth()->user()->company_id ?? null)
+                    ->where('product_id', $product)
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+            }
+
         } catch (\Throwable $th) {
             Log::error('Error', [
                 'message' => $th->getMessage(),
@@ -91,9 +96,9 @@ class GalleryRepository
             $img->is_main_image = true;
             $img->save();
 
-         if($img){
-            return true;
-         }
+            if ($img) {
+                return true;
+            }
 
         } catch (\Throwable $th) {
             Log::error('Error', [

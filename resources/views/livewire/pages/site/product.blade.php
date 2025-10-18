@@ -27,7 +27,7 @@
             @forelse($products as $prod)
                 <div data-name="{{ strtolower($prod->name) }}" data-category="{{ $prod->category->name }}"
                     class="product-card bg-white border border-gray-200 rounded-lg shadow hover:shadow-xl hover:-translate-y-1 transition transform duration-200">
-                    <img src="{{ $prod->name}}" alt="{{ $prod->name }}" class="rounded-t-lg w-full h-48 object-cover">
+                    <img src="{{ $this->getMainImage($prod->id) == null ? asset('ishop-without-bg.png'): $this->getMainImage($prod->id) }}" alt="{{ $prod->name }}" class="rounded-t-lg w-full h-48 object-cover">
                     <div class="p-4">
                         <h5 class="text-lg font-semibold mb-1 text-gray-800 truncate">{{ $prod->name }}</h5>
                         <span class="text-sm text-gray-500 block mb-2">{{ $prod->category->name }}</span>
@@ -37,9 +37,9 @@
                                 class="flex-1 mr-2 text-white bg-green-600 hover:bg-green-700 px-3 py-2 rounded-lg text-sm transition">
                                 Adicionar
                             </button>
-                            <button data-modal-target="modalProduto" data-modal-toggle="modalProduto" {{--
-                                onclick="showProductModal('{{ $produto['nome'] }}', '{{ $produto['preco'] }}', ['{{ $produto['imagem'] }}'])"
-                                --}}
+                            <button data-modal-target="modalProduto" data-modal-toggle="modalProduto"
+                                wire:click="getDetail({{ $prod->id }})"
+                                
                                 class="flex-1 ml-2 text-white bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-lg text-sm transition">
                                 Detalhes
                             </button>

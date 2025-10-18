@@ -2,6 +2,7 @@
 
 namespace App\Repositories\Product;
 
+use App\Models\Gallery;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Log;
 use App\Models\Product;
@@ -59,7 +60,7 @@ class ProductRepository
     }
 
     /** listar Produto */
-    public static function search(?string $search,?int $perPage,?int $category, ?bool $all = false,?bool $withCompany = false)
+    public static function search(?string $search, ?int $perPage, ?int $category, ?bool $all = false, ?bool $withCompany = false)
     {
         try {
 
@@ -113,5 +114,51 @@ class ProductRepository
             ]);
             return [];
         }
+    }
+
+    /** get main image */
+    public static function getMainImage($product)
+    {
+        try {
+            $data = Gallery::where('product_id', $product)
+                ->where('is_main_image', 1)
+                ->select('image')
+                ->first();
+
+            if ($data) {
+                return $data->image;
+            }
+
+
+            return null;
+        } catch (\Throwable $th) {
+            Log::error('Error', [
+                'message' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile(),
+            ]);
+        }
+
+    }
+
+
+    /** get main image */
+    public static function getDetail($product)
+    {
+        try {
+            $data = Product::where('id', $product)
+                ->with('gallery')
+                ->first();
+
+
+            return $data;
+        } catch (\Throwable $th) {
+            Log::error('Error', [
+                'message' => $th->getMessage(),
+                'line' => $th->getLine(),
+                'file' => $th->getFile(),
+            ]);
+        }
+
     }
 }
