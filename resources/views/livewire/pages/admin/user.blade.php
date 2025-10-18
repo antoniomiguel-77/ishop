@@ -1,4 +1,4 @@
-<div x-data="{ showModalUser: false}" x-init="document.addEventListener('closeModal', () => { showModalUser = false }),
+<div x-data="{ showModalUser: false }" x-init="document.addEventListener('closeModal', () => { showModalUser = false }),
     document.addEventListener('closeModalUser', () => { showModalUser = false })">
 
     <x-slot name="header">
@@ -32,7 +32,7 @@
                             </svg>
                         </span>
                         <input type="search" wire:model.live.debounce.100ms="search"
-                            placeholder="Pesquisar por descrição, categoria e subcategoria"
+                            placeholder="Pesquisar por nome"
                             class="pl-8 pr-2 py-2 rounded-lg w-full border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
                     </div>
                 </div>
@@ -55,6 +55,7 @@
                         <tr>
                             <th class="px-6 py-3">Nome</th>
                             <th class="px-6 py-3">Email</th>
+                            <th class="px-6 py-3">Tipo</th>
                             <th class="px-6 py-3 text-right">Ações</th>
                         </tr>
                     </thead>
@@ -67,7 +68,14 @@
                                 <td class="px-6 py-3">
                                     <span class="uppercase font-medium">{{ $item->email }}</span>
                                 </td>
-                          
+                                <td class="px-6 py-3">
+                                    <span
+                                        class="inline-block px-2 py-1 text-xs font-medium uppercase text-white bg-{{ $item->type == 'customer' ? 'green':'blue' }}-600 rounded-full">
+                                        {{ $item->type == 'customer' ? 'Cliente':'Gestor' }}
+                                    </span>
+
+                                </td>
+
                                 <td class="px-6 py-3 text-right">
                                     <button @click="showModalUser = true;" wire:click="edit({{ $item->id }})"
                                         class="text-blue-600 hover:underline mr-2">
@@ -82,7 +90,7 @@
                         @empty
                             <tr>
                                 <td colspan="3" class="px-6 py-4 text-center text-gray-500">
-                                    Nenhum Utilizadorencontrado
+                                    Nenhum Utilizador Encontrado
                                 </td>
                             </tr>
                         @endforelse
@@ -92,12 +100,10 @@
 
             <!-- Footer -->
             <div class="px-6 py-4 border-t border-gray-200">
-                {{ $users->links('components.custom-pagination') }} 
+                {{ $users->links('components.custom-pagination') }}
             </div>
         </div>
     </div>
 
-     @include('includes.user')
+    @include('includes.user')
 </div>
-
-

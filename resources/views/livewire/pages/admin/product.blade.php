@@ -32,7 +32,7 @@
                             </svg>
                         </span>
                         <input type="search" wire:model.live.debounce.100ms="search"
-                            placeholder="Pesquisar por descrição, categoria e subcategoria"
+                            placeholder="Pesquisar por descrição"
                             class="pl-8 pr-2 py-2 rounded-lg w-full border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-sm">
                     </div>
                 </div>
