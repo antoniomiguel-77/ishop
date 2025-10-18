@@ -113,7 +113,7 @@
 
             <!-- Footer -->
             <div class="px-6 py-4 border-t border-gray-200">
-                {{ $products->links('components.custom-pagination') }}
+                {{  isset($products) && count($products) > 0 ?  $products->links('components.custom-pagination'):'' }}
             </div>
         </div>
     </div>

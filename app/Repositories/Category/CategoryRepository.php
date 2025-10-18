@@ -15,13 +15,15 @@ class CategoryRepository
     {
         try {
 
-            return Category::where(function ($query) use ($search) {
-                if (isset($search['search'])) {
-                    $query->where('name', 'like', '%' . $search['search'] . '%');
+            $query = Category::where(function ($query) use ($search) {
+                if (isset($search)) {
+                    $query->where('name', 'like', '%' . $search . '%');
                 }
-            })
-                ->where('company_id', auth()->user()->company_id ?? null)
-                ->orderBy('created_at', 'desc')
+            });
+            if (auth()?->user()?->company_id) {
+                $query->where('company_id', auth()->user()?->company_id);
+            }
+            return $query->orderBy('created_at', 'desc')
                 ->get();
         } catch (\Throwable $th) {
             Log::error('Error', [

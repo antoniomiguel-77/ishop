@@ -59,26 +59,31 @@ class ProductRepository
     }
 
     /** listar Produto */
-    public static function search(array $search, $all = false)
+    public static function search(?string $search,?int $perPage,?int $category, ?bool $all = false,?bool $withCompany = false)
     {
         try {
 
             $query = Product::query();
 
-            if (!empty($search['search'])) {
-                $query->where('name', 'like', '%' . $search['search'] . '%');
+            if (!empty($search)) {
+                $query->where('name', 'like', '%' . $search . '%');
             }
 
-            if (auth()?->user()?->company_id) {
+            if ($withCompany) {
                 $query->where('company_id', auth()->user()?->company_id);
             }
+
+            if (!empty($category)) {
+                $query->where('category_id', $category);
+            }
+
             if ($all) {
                 return $query->orderBy('created_at', 'desc')->get();
             }
             return $query
                 ->where('status', 1)
                 ->orderBy('created_at', 'desc')
-                ->paginate(is_numeric($search['perPage'] ?? 5) ? (int)$search['perPage'] : 10);
+                ->paginate($perPage);
         } catch (\Throwable $th) {
             Log::error('Erro na busca de produtos', [
                 'message' => $th->getMessage(),

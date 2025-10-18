@@ -4,52 +4,51 @@
 
         <div class="flex flex-col md:flex-row items-center justify-between mb-8 gap-4">
             <div class="w-full md:w-1/2">
-                <input type="text" id="searchInput" onkeyup="filterProducts()"
-                    placeholder="Pesquisar por nome..."
+                <input type="text" id="searchInput" wire:model.live.200ms="search" placeholder="Pesquisar por nome..."
                     class="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
             </div>
 
             <div>
-                <select id="categoryFilter" onchange="filterProducts()"
+                <select id="categoryFilter" wire:model.live.200ms="category"
                     class="px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 outline-none transition">
-                    <option value="">Todas Categorias</option>
-                    <option value="Smartphones">Smartphones</option>
-                    <option value="Computadores">Computadores</option>
-                    <option value="Acessórios">Acessórios</option>
-                    <option value="Relógios">Relógios</option>
+                    <option value="0">Todas Categorias</option>
+                    @forelse($categories as $cat)
+                        <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                    @empty
+                        <option value="">Nenhum Categoria Encontrada</option>
+                    @endforelse
                 </select>
             </div>
         </div>
 
         <div id="productsGrid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            @foreach ([
-                ['nome' => 'iPhone 14', 'categoria' => 'Smartphones', 'preco' => '1.200.000 AKZ', 'imagem' => 'https://via.placeholder.com/300'],
-                ['nome' => 'Macbook Pro', 'categoria' => 'Computadores', 'preco' => '2.800.000 AKZ', 'imagem' => 'https://via.placeholder.com/300'],
-                ['nome' => 'AirPods Pro', 'categoria' => 'Acessórios', 'preco' => '180.000 AKZ', 'imagem' => 'https://via.placeholder.com/300'],
-                ['nome' => 'Apple Watch', 'categoria' => 'Relógios', 'preco' => '250.000 AKZ', 'imagem' => 'https://via.placeholder.com/300']
-            ] as $produto)
-                <div data-name="{{ strtolower($produto['nome']) }}" data-category="{{ $produto['categoria'] }}"
+
+
+            @forelse($products as $prod)
+                <div data-name="{{ strtolower($prod->name) }}" data-category="{{ $prod->category->name }}"
                     class="product-card bg-white border border-gray-200 rounded-lg shadow hover:shadow-xl hover:-translate-y-1 transition transform duration-200">
-                    <img src="{{ $produto['imagem'] }}" alt="{{ $produto['nome'] }}"
-                        class="rounded-t-lg w-full h-48 object-cover">
+                    <img src="{{ $prod->name}}" alt="{{ $prod->name }}" class="rounded-t-lg w-full h-48 object-cover">
                     <div class="p-4">
-                        <h5 class="text-lg font-semibold mb-1 text-gray-800 truncate">{{ $produto['nome'] }}</h5>
-                        <span class="text-sm text-gray-500 block mb-2">{{ $produto['categoria'] }}</span>
-                        <p class="text-blue-600 font-bold mb-4">{{ $produto['preco'] }}</p>
+                        <h5 class="text-lg font-semibold mb-1 text-gray-800 truncate">{{ $prod->name }}</h5>
+                        <span class="text-sm text-gray-500 block mb-2">{{ $prod->category->name }}</span>
+                        <p class="text-blue-600 font-bold mb-4">@Money($prod->priceWithTax)</p>
                         <div class="flex justify-between">
-                            <button onclick="addToCart('{{ $produto['nome'] }}')"
+                            <button onclick="addToCart('{{ $prod->name }}')"
                                 class="flex-1 mr-2 text-white bg-green-600 hover:bg-green-700 px-3 py-2 rounded-lg text-sm transition">
                                 Adicionar
                             </button>
-                            <button data-modal-target="modalProduto" data-modal-toggle="modalProduto"
+                            <button data-modal-target="modalProduto" data-modal-toggle="modalProduto" {{--
                                 onclick="showProductModal('{{ $produto['nome'] }}', '{{ $produto['preco'] }}', ['{{ $produto['imagem'] }}'])"
+                                --}}
                                 class="flex-1 ml-2 text-white bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-lg text-sm transition">
                                 Detalhes
                             </button>
                         </div>
                     </div>
                 </div>
-            @endforeach
+            @empty
+
+            @endforelse
         </div>
     </div>
 

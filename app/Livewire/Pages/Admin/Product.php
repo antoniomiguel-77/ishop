@@ -15,7 +15,7 @@ class Product extends Component
 {
     use WithPagination;
     public $product_id, $subcategory_id, $category_id, $searchCategory,$qtd = 1;
-    public $categories = [];
+    public $categories = [],$category;
     public $name, $price, $type = 'unit', $tax = 0, $reason_id, $perPage = 5, $search;
 
 
@@ -116,7 +116,7 @@ class Product extends Component
     public function getcategories($search)
     {
         try {
-            return CategoryRepository::search([]);
+            return CategoryRepository::search($search);
         } catch (\Exception $e) {
             LivewireAlert::text('Falha ao carregar os dados do Produto.')
                 ->error()
@@ -147,14 +147,18 @@ class Product extends Component
 
         try {
 
-            return  ProductRepository::search([
-                'search' => $this->search,
-                'perPage' => $this->perPage,
-            ]);
+            return  ProductRepository::search(
+                $this->search,
+                $this->perPage,
+                $this->category,
+                false,
+                true
+            );
 
      
             
         } catch (\Throwable $th) {
+            dd($th->getMessage());
             LivewireAlert::text('Falha ao realizar a operação. Por favor, tente novamente.')
                 ->error()
                 ->toast()
