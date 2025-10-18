@@ -1,5 +1,5 @@
 <p align="center">
-    <a href="#"><img src="https://raw.githubusercontent.com/yourusername/ishop/main/logo.png" width="300" alt="iShop Logo"></a>
+    <a href="#"><img src="" width="300" alt="iShop Logo"></a>
 </p>
 
 <p align="center">
@@ -68,4 +68,6 @@ Email: admin@example.com
 Senha: password
 
 
-### 
+### OBS
+Não usei o docker composer, pós tive algumas complicações com meu computador...
+Porém é algo que posso fazer de maneira presencial.
