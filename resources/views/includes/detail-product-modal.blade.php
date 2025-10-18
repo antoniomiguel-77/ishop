@@ -43,11 +43,12 @@
                     </div>
 
                     <div class="flex flex-col sm:flex-row items-center sm:items-end gap-4 mt-6">
-                        <input type="number" id="modalQuantidade" min="1" value="1"
+                        <input type="number" wire:model="qtd" id="modalQuantidade" min="1" value="1"
                             class="w-24 border rounded-lg px-3 py-2 focus:ring-green-500 focus:border-green-500">
-                        <button
-                            class="flex-1 bg-green-600 text-white px-6 py-3 rounded-lg hover:bg-green-700 transition font-semibold">
-                            Comprar Agora
+                        <button type="button" wire:click="addToCar({{ $prod->id }})" wire:loading.attr="disabled" wire:target="addToCar({{ $prod->id }})"
+                            class="flex-1 bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition font-semibold">
+                            <i wire:loading wire:target="addToCar({{ $prod->id }})" class="fa fa-spinner fa-spin"></i>
+                            Adicionar
                         </button>
                     </div>
                 </div>

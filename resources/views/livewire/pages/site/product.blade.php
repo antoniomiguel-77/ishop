@@ -33,8 +33,9 @@
                         <span class="text-sm text-gray-500 block mb-2">{{ $prod->category->name }}</span>
                         <p class="text-blue-600 font-bold mb-4">@Money($prod->priceWithTax)</p>
                         <div class="flex justify-between">
-                            <button onclick="addToCart('{{ $prod->name }}')"
+                            <button type="button" wire:click="addToCar({{ $prod->id }})" wire:loading.attr="disabled" wire:target="addToCar({{ $prod->id }})"
                                 class="flex-1 mr-2 text-white bg-green-600 hover:bg-green-700 px-3 py-2 rounded-lg text-sm transition">
+                                <i wire:loading wire:target="addToCar({{ $prod->id }})" class="fa fa-spinner fa-spin"></i>
                                 Adicionar
                             </button>
                             <button data-modal-target="modalProduto" data-modal-toggle="modalProduto"
@@ -47,7 +48,7 @@
                     </div>
                 </div>
             @empty
-
+                <div><h2>Nenhum Produto Encontrado</span></div>
             @endforelse
         </div>
     </div>

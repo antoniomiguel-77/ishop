@@ -5,13 +5,14 @@ namespace App\Livewire\Pages\Site;
 use App\Models\Gallery;
 use App\Repositories\Category\CategoryRepository;
 use App\Repositories\Product\ProductRepository;
+use App\Services\CartService;
 use Jantinnerezo\LivewireAlert\Facades\LivewireAlert;
 use Livewire\Attributes\On;
 use Livewire\Component;
 
 class Product extends Component
 {
-    public $search, $category, $detail = [];
+    public $search, $category, $detail = [],$qtd = 1;
     public function render()
     {
         return view('livewire.pages.site.product', [
@@ -61,14 +62,11 @@ class Product extends Component
         }
     }
 
-    #[On('productSeted')]
-    public function productSeted($product)
-    {
-        $this->product_id = $product;
-        $this->existingImages = GalleryRepository::search($this->product_id);
-    }
 
-
+    /**
+     * Summary of getMainImage
+     * @param mixed $product
+     */
     public function getMainImage($product)
     {
         try {
@@ -84,6 +82,11 @@ class Product extends Component
 
     }
 
+    /**
+     * Summary of getDetail
+     * @param mixed $product
+     * @return void
+     */
     public function getDetail($product)
     {
         
@@ -100,4 +103,27 @@ class Product extends Component
         }
 
     }
+
+
+    public function addToCar($product)
+    {
+        try {
+            $add =  CartService::addToCart($product,$this->qtd);
+             LivewireAlert::text($add)
+                ->success()
+                ->toast()
+                ->position('top-end')
+                ->show();
+
+                $this->dispatch('updateCounterItem');
+        } catch (\Throwable $th) {
+              LivewireAlert::text('Falha ao realizar a operação. Por favor, tente novamente.')
+                ->error()
+                ->toast()
+                ->position('top-end')
+                ->show();
+        }
+    }
+
+
 }

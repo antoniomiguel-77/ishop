@@ -46,17 +46,10 @@
 
     @include('livewire.welcome.navigation')
 
-    {{-- 🛒 Botões Flutuantes (Carrinho + WhatsApp) --}}
+    {{-- Botões Flutuantes (Carrinho + WhatsApp) --}}
     <div class="fixed bottom-5 right-5 flex flex-col gap-3 z-50">
         {{-- Carrinho --}}
-        <button
-            class="relative flex items-center justify-center w-14 h-14 rounded-full bg-blue-600 text-white shadow-lg hover:bg-blue-700 transition transform hover:scale-105 focus:outline-none">
-            <i class="fa-solid fa-cart-shopping text-xl"></i>
-            <span class="absolute -top-1 -right-1 bg-red-600 text-white text-xs font-semibold rounded-full px-2 py-0.5"
-                id="nav-cart-badge">
-                0
-            </span>
-        </button>
+       <livewire:pages.site.cart-counter/>
 
         {{-- WhatsApp --}}
         <a href="https://wa.me/244900000000" target="_blank"
@@ -109,6 +102,7 @@
 
     {{-- CONTACTO --}}
     @livewire('pages.site.contact')
+    @livewire('pages.site.cart-component')
 
     {{-- FOOTER --}}
     <footer class="bg-white border-t border-gray-200 mt-16">
@@ -141,6 +135,7 @@
         <div class="border-t border-gray-200 text-center py-4 text-sm text-gray-500">
             © <span id="year"></span> iShop. Todos os direitos reservados.
         </div>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </footer>
 </body>
 
