@@ -15,7 +15,7 @@ class Product extends Component
 {
     use WithPagination;
     public $product_id, $subcategory_id, $category_id, $searchCategory,$qtd = 1;
-    public $categories = [],$category;
+    public $categories = [],$category,$description;
     public $name, $price, $type = 'unit', $tax = 0, $reason_id, $perPage = 5, $search;
 
 
@@ -189,6 +189,7 @@ class Product extends Component
                 'subcategory_id' => $this->subcategory_id,
                 'company_id' => auth()->user()?->company_id ?? null,
                 'user_id' => auth()->user()?->id ?? null,
+                'description'=>$this->description,
             ];
 
 
@@ -244,7 +245,7 @@ class Product extends Component
             $this->tax = $product->tax;
             $this->reason_id = $product->reason_id;
             $this->category_id = $product->category_id;
-            $this->subcategory_id = $product->subcategory_id;
+            $this->description = $product->description;
             $this->dispatch('editProd', $this->category_id, $this->subcategory_id);
         } catch (\Throwable $th) {
             LivewireAlert::text('Falha ao carregar os dados do Produto.')

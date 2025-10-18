@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        if(Schema::hasTable("products",'description')) return;
+        if(Schema::hasColumn("products",'description')) return;
         Schema::table('products', function (Blueprint $table) {
             $table->longText('description')->nullable()->after('name');
         });

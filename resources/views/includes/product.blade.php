@@ -169,6 +169,19 @@
                     @enderror
                 </div>
 
+                 <div class="w-full mb-5">
+                    <label for="description" class="block mb-2 text-sm font-medium text-gray-900">
+                        Descrição
+                        </label>
+                    <textarea id="description" wire:model="description"class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5">
+                     
+                    </textarea>
+                    @error('description')
+                        <span class="text-sm text-red-600">{{ $message }}</span>
+                    @enderror
+                </div>
+
+
                 <!-- Footer -->
                 <div class="flex justify-end mt-6 space-x-3">
                     <button type="button" @click="showModalProd = false"
