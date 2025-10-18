@@ -12,7 +12,7 @@
             class="bg-white rounded-2xl shadow-sm p-6 flex items-center justify-between hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
             <div>
                 <h3 class="text-gray-500 text-sm font-medium">Total Utilizadores</h3>
-                <p class="text-4xl font-extrabold text-gray-900 mt-2">1,245</p>
+                <p class="text-4xl font-extrabold text-gray-900 mt-2">{{$userCount}}</p>
             </div>
             <div class="bg-blue-100 text-blue-600 p-4 rounded-full shadow-inner">
                 <i class="fa-solid fa-users text-2xl"></i>
@@ -24,7 +24,7 @@
             class="bg-white rounded-2xl shadow-sm p-6 flex items-center justify-between hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
             <div>
                 <h3 class="text-gray-500 text-sm font-medium">Total Produtos</h3>
-                <p class="text-4xl font-extrabold text-gray-900 mt-2">568</p>
+                <p class="text-4xl font-extrabold text-gray-900 mt-2">{{ $productCount }}</p>
             </div>
             <div class="bg-green-100 text-green-600 p-4 rounded-full shadow-inner">
                 <i class="fa-solid fa-box-open text-2xl"></i>
@@ -36,7 +36,7 @@
             class="bg-white rounded-2xl shadow-sm p-6 flex items-center justify-between hover:shadow-lg hover:scale-[1.02] transition-all duration-300">
             <div>
                 <h3 class="text-gray-500 text-sm font-medium">Total Encomendas</h3>
-                <p class="text-4xl font-extrabold text-gray-900 mt-2">312</p>
+                <p class="text-4xl font-extrabold text-gray-900 mt-2">{{$orderCount}}</p>
             </div>
             <div class="bg-yellow-100 text-yellow-600 p-4 rounded-full shadow-inner">
                 <i class="fa-solid fa-truck-fast text-2xl"></i>
