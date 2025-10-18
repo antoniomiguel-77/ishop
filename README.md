@@ -54,7 +54,13 @@ DB_PASSWORD=
 php artisan migrate --seed
 
 
-### 5. Usuário e senha inicial
+### 5. Iniciar o projecto e acessar no browser
+composer run dev
+
+acessar https://127.0.0.1:8000
+
+
+### 6. Usuário e senha inicial
 Após rodar os seeders, use o usuário padrão para acessar o painel administrativo:
 
 Email: admin@example.com
